@@ -2,3 +2,6 @@
 /cache
 *.iml
 *.ipr
+*.swp
+*.swo
+*~

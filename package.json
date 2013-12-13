@@ -1,0 +1,38 @@
+{
+    "name": "chron-web",
+    "version": "0.0.1-SNAPSHOT",
+    "author": "Peter Cummuskey <peterc@aetheric.co.nz>",
+    "description": "The angular front-end for the Chronicler LARP manager",
+    "private": true,
+
+    "scripts": {
+      "start": "node ./app.js"
+    },
+
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/aetheric/chron-web.git"
+    },
+
+    "keywords": [
+      "angular",
+      "webapp",
+      "frontend"
+    ],
+
+    "dependencies" : {
+		"colors": "0.6.0-1",
+		"optimist": "0.3.5",
+		"express": "3.4.7",
+		"express-minify: "0.0.7"
+    },
+
+    "devDependencies": {
+      "testacular": "0.6.0"
+    },
+
+    "engines": {
+      "node": ">=0.6"
+    }
+
+}

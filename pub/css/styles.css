@@ -37,3 +37,9 @@ body:before {
 }
 
 /* End Sticky-footer styles */
+
+/* Make room for G+1 button */
+#footer p.navbar-text.gplus {
+	margin-top: 11px;
+	margin-bottom: 10px;
+}

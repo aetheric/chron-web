@@ -10,18 +10,14 @@ html
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
 		link(rel='stylesheet', media='screen', href='/lib/bootstrap.css')
+		link(rel='stylesheet', media='screen', href='/css/styles.css')
 		if script
 			script(data-main="#{script}", src="/lib/require.js")
 	body
-	
-		.wrap
-		
+
+		#wrap: #content
 			include navbar
+			.container: block content
 
-			.container
-
-				block content
-
-		.footer
-			.container
-				p &copy; Aetheric Engineering 2013
+		#footer
+			include footer

@@ -65,5 +65,31 @@ module.exports = function(express) {
 	express.get('/view/:viewName', function(req, res) {
 		res.render(req.params.viewName);
 	});
+	
+	express.use(function(req, res) {
+		res.status(404);
+		
+		if (req.accepts('html')) {
+			res.render('404', {
+				title: 'Missing',
+				path: req.url,
+				script: null
+			});
+			
+			return;
+		}
+		
+		if (req.accepts('json')) {
+			res.json({
+				error: 'Not found',
+				path: req.url
+			});
+			
+			return;
+		}
+		
+		res.type('txt')
+		   .send('Can\'t find ' + req.url);
+	});
 
 };

@@ -1,7 +1,7 @@
 extends layout
 
 block extranav
-	li: a(href="/detail/#{item.id}/#{item.slug}") #{title}
+	li.active: a(href="/detail/#{item.id}/#{item.slug}") #{title}
 
 block content
 

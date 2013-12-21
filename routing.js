@@ -22,8 +22,40 @@ module.exports = function(express) {
 	express.get('/home', renderView('home', 'Home', null));
 	express.get('/about', renderView('about', 'About', null));
 	express.get('/auth', renderView('auth', 'Login/Signup', null));
-	express.get('/index', renderView('index', 'Index', null));
 	express.get('/app', renderView('app', null, '/pub/assets.js'));
+	
+	// Index page rendering
+	express.get('/index', function(req, res) {
+	
+		// Get results based on search terms
+		var results = [
+
+			{
+				id: 5,
+				title: 'Test Result Item #1',
+				slug: 'test-result-item-1',
+				description: 'This is a test result item for testing result items',
+				status: 'working',
+				updated: '21/12/13'
+			},
+
+			{
+				id: 5,
+				title: 'Test Result Item #2',
+				slug: 'test-result-item-2',
+				description: 'This is a test result item for testing result items',
+				status: 'working',
+				updated: '21/12/13'
+			}
+		
+		];
+		
+		res.render('index', {
+			items: results,
+			title: 'Index',
+			script: null
+		});
+	});
 	
 	// Detail page rendering
 	express.get('/detail/:detailId?/:detailSlug?', function(req, res) {

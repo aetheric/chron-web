@@ -8,4 +8,26 @@ block content
 	.row
 	
 		.col-md-12
-			p TODO!
+			table.table.table-striped.table-hover
+			
+				thead: tr
+					th
+					th Name
+					th Brief Description
+					th Status
+					th Updated
+					th Details
+
+				tbody
+					- for item in items
+						tr
+							td: img
+							td #{item.title}
+							td #{item.description}
+							td #{item.status}
+							td #{item.updated}
+							td: a.btn(href='/detail/#{item.id}/#{item.slug}') &raquo
+
+				tfoot: tr
+					td(colspan='6')
+						// Search / pagination ?

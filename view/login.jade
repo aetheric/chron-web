@@ -1,0 +1,39 @@
+extends layout
+
+mixin input(id, type, placeholder)
+	input(id='#{id}', type='#{type}', placeholder='#{placeholder}')
+
+block content
+
+	.page-title
+		h1 Log-in <small>get into the app</small>
+		p Don't have an account? <a href="/register">Register</a> now.
+
+	.row
+
+		.col-md-4
+			h3 Classical
+			form.form-horizontal
+
+				.control-group
+					label.control-label(for='username') Username
+					.controls
+						+input('username', 'text', 'Dalaraxis')
+
+				.control-group
+					label.control-label(for='password') Password
+					.controls
+						+input('password', 'password', 'iamthelichking')
+
+				.form-actions
+					button.btn.btn-success(type='submit') Log-in
+
+		.col-md-4
+			h3 Social
+			p TODO: Facebook
+			p TODO: Google+
+			p TODO: Twitter
+
+		.col-md-4
+			h3 SQRL
+			p TODO: SQRL code

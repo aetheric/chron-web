@@ -21,7 +21,8 @@ module.exports = function(express) {
 	// Basic page rendering
 	express.get('/home', renderView('home', 'Home', null));
 	express.get('/about', renderView('about', 'About', null));
-	express.get('/auth', renderView('auth', 'Login/Signup', null));
+	express.get('/register', renderView('register', 'Register', null));
+	express.get('/login', renderView('login', 'Log-in', null));
 	express.get('/app', renderView('app', null, '/pub/assets.js'));
 	
 	// Index page rendering

@@ -1,0 +1,35 @@
+mixin navlink(pagetitle, pagename)
+	- var clazz = ( pagetitle == title ? 'active' : '' )
+	li(class=clazz)
+		a(href='/#{pagename}') #{pagetitle}
+
+.navbar.navbar-default(role='navigation')
+	.container
+
+		.navbar-header
+
+			button.navbar-toggle(type='button', data-toggle='collapse',  data-target='#navbar-primary')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+
+			a.navbar-brand(href='/') Chronicler
+
+		#navbar-primary.collapse.navbar-collapse
+
+			ul.nav.navbar-nav
+				+navlink('Home', 'home')
+				+navlink('Index', 'index')
+				+navlink('Login//Signup', 'auth')
+				+navlink('About', 'about')
+
+			ul.nav.navbar-nav.navbar-right
+
+				li.dropdown
+
+					a.dropdown-toggle(href='#', data-toggle='dropdown').
+						Settings <b class="caret"></b>
+
+					ul.dropdown-menu
+						li: a(href='#/acct') Account

@@ -1,0 +1,31 @@
+<div class="char-list">
+
+	<div ng-show="flag.loading">
+		<p>Loading Characters</p>
+	</div>
+
+	<div ng-show="flag.empty">
+		<p>No characters are currently available</p>
+	<div>
+
+	<ul ng-show="list">
+		<li ng-repeat="group in charList"
+		    ng-class="{ active: group.active }">
+
+			<span>{{ group.display }}</span>
+
+			<ul>
+				<li ng-repeat="character in group.characters"
+				    ng-class="{ active: character.active }">
+
+					<a href="#" ng-click="select($event, character)">
+						{{ character.display }}
+					</a>
+
+				</li>
+			</ul>
+
+		</li>
+	</ul>
+
+</div>

@@ -1,0 +1,27 @@
+doctype xml
+doctype html
+html
+	head
+		if title
+			title #{title} | Chronicler
+		else
+			title Chronicler
+
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+		link(rel='stylesheet', media='screen', href='/lib/bootstrap.css')
+		if script
+			script(data-main="#{script}", src="/lib/require.js")
+	body
+	
+		.wrap
+		
+			include navbar
+
+			.container
+
+				block content
+
+		.footer
+			.container
+				p &copy; Aetheric Engineering 2013

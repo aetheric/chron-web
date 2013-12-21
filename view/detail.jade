@@ -1,0 +1,36 @@
+doctype xml
+doctype html
+html
+	head
+		title =title | Chronicler
+
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+		link(rel="stylesheet", media="screen", href="/lib/bootstrap.css")
+		// Load javascript for Angular components here.
+	body
+	
+		.wrap
+
+			.navbar.navbar-static-top
+				.navbar-inner
+					.container
+						a.brand(href="#") Chronicler
+						ul.nav
+							li: a(href="/home") Home
+							li: a(href="/index")Index
+							li: a(href="/auth") Login/Signup
+							li: a(href="/about") About
+							li: a(href="/detail/=id/=slug") =title
+
+			.container
+			
+				.page-title
+					h1 =title
+
+				.row
+					p TODO!
+
+		.footer
+			.container
+				p &copy; Aetheric Engineering 2013

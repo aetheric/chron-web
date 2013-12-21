@@ -1,36 +1,19 @@
-'use strict';
+module.exports = function(express) {
+	return; // Don't do anything at the moment.
 
-var pound = require('pound').create({
-	publicDir: __dirname + '/web/pub',
-	staticUrlRoot: '/'
-});
+	var BundleUp = require('bundle-up2');
+	BundleUp(express, function(assets) {
+		assets.addJs('/lib/angular.js');
+		assets.addJs('/lib/angular-route.js');
+		assets.addJs('/app/chron.js');
 
-var bundle = pound.defineAsset;
+		assets.addCss('/lib/bootstrap.css');
+	}, {
+		staticRoot: __dirname + '/pub',
+		staticUrlRoot: '/',
+		bundle: false,
+		minifyCss: false,
+		minifyJs: false
+	});
 
-pound.resolve.app = function(filename) {
-	return '/web/app/' + filename + '.js';
 };
-
-pound.resolve.css = function(filename) {
-	return '/web/css/' + filename + '.css';
-};
-
-pound.resolve.lib = function(filename) {
-	return '/web/lib/' + filename;
-};
-
-bundle('chron', {
-
-	css: [
-		'$lib/bootstrap.css'
-	],
-
-	js: [
-		'$lib/angular.js',
-		'$lib/angular-route.js',
-		'$lib/angular-mocks.js',
-		'$app/chron'
-	]
-});
-
-module.exports = pound;

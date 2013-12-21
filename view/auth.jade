@@ -1,0 +1,50 @@
+extends layout
+
+mixin input(id, type, placeholder)
+	input(id='#{id}', type='#{type}', placeholder='#{placeholder}')
+
+block content
+
+	.page-title
+		h1 Login/Signup <small>get into the app</small>
+
+	.row
+
+		.col-md-6
+			h3 Create an account
+			form.form-horizontal
+
+				.control-group
+					label.control-label(for='signupUsername') Username
+					.controls
+						+input('signupUsername', 'text', 'Dalaraxis')
+
+				.control-group
+					label.control-label(for='signupPassword') Password
+					.controls
+						+input('signupPassword', 'password', 'iamthelichking')
+
+				.control-group
+					label.control-label(for='signupEmail') Email
+					.controls
+						+input('signupEmail', 'email', 'special@snowflake.com')
+
+				.form-actions
+					button.btn.btn-success(type='submit') Create
+
+		.col-md-6
+			h3 Login
+			form.form-horizontal
+
+				.control-group
+					label.control-label(for='loginUsername') Username
+					.controls
+						+input('loginUsername', 'text', 'Dalaraxis')
+
+				.control-group
+					label.control-label(for='loginPassword') Password
+					.controls
+						+input('loginPassword', 'password', 'iamthelichking')
+
+				.form-actions
+					button.btn.btn-success(type='submit') Login

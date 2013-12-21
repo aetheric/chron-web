@@ -1,0 +1,16 @@
+extends layout
+
+block extranav
+	li: a(href="/detail/#{itemId}") Details Not Found
+
+block content
+
+	.page-title
+		h1 Details Not Found <small>for id ##{itemId}
+
+	.row
+		.col-md-12
+			p.
+				The LARP details you are looking for cannot be found on the system. This may be due a technical glitch, or an incorrect URL.
+			p.
+				Try searching for the item in the <a href="/index">Index</a>, or if one of the entries there links to this page, please <a href="/about">contact the developer</a>.

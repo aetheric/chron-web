@@ -23,13 +23,4 @@ mixin navlink(pagetitle, pagename)
 				+navlink('Index', 'index')
 				+navlink('Login/Signup', 'auth')
 				+navlink('About', 'about')
-
-			ul.nav.navbar-nav.navbar-right
-
-				li.dropdown
-
-					a.dropdown-toggle(href='#', data-toggle='dropdown').
-						Settings <b class="caret"></b>
-
-					ul.dropdown-menu
-						li: a(href='#/acct') Account
+				block extranav

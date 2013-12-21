@@ -26,11 +26,33 @@ module.exports = function(express) {
 	express.get('/app', renderView('app', null, '/pub/assets.js'));
 	
 	// Detail page rendering
-	express.get('/detail/:detailId/:detailSlug?', function(req, res) {
-		//v Retrieve detail item by req.params.detailId.
-		var detailItem = {
+	express.get('/detail/:detailId?/:detailSlug?', function(req, res) {
+
+		var requestId = req.params.detailId;
+		if (!requestId) {
+			res.render('detail_missing', {
+				itemId: null,
+				title: 'Details Missing'
+			});
+
+			return;
+		}
+
+		// Retrieve detail item by req.params.detailId.
+		var detailItem = ( requestId == 5 ? {
 			id: req.params.detailId,
-			slug: 'other-slug'
+			slug: 'other-slug',
+			title: 'Test Detail Item'
+		} : null );
+
+		if (!detailItem) {
+			res.render('detail_missing', {
+				itemId: requestId,
+				title: 'Details Missing',
+				script: null
+			});
+
+			return;
 		};
 		
 		// if detail slug is missing / incorrect, permanent redirect to correct slug.

@@ -4,26 +4,27 @@ block content
 
 	.jumbotron
 		h1 Chronicler
-		p.lead Welcome to a brave new world of Live-action Roleplaying!
-		a.btn.btn-large.btn-success(href='/index') Index
-		a.btn.btn-large.btn-success(href='/auth') Login/Signup
+		p Welcome to a brave new world of Live-action Roleplaying!
+		p: a.btn.btn-lg.btn-success(href='/index', role='button') View The Index
 
 	.row
 
 		.col-md-4
 			h2 One-off
 			p.
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				Search for "one-off" style games that can challenge and entertain you without the need to commit to a long-term campaign.
 			p: a.btn(href='/index?type=single') View listings &raquo;
 
 		.col-md-4
 			h2 Campaign
 			p.
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				Join into a story spread across multiple episodes with Campaign games. Join the players as a character seeking to unravel the mysteries of the events surrounding the group, or experience the variety of roles available as a member of the crew.
 			p: a.btn(href='/index?type=camp') View listings &raquo;
 
 		.col-md-4
 			h2 Help Wanted
 			p.
-				Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.
+				Games are being written and designed every day. If you have skills that would help put one together, or simply have the time and imagination to lend a hand, find a game and contribute.
 			p: a.btn(href='/index?status=writing') View listings &raquo;
+
+	// Add news items here

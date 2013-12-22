@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: 'https://dl.dropboxusercontent.com/u/186372/chron/',
+	baseUrl: '/',
 
 	paths: {
 

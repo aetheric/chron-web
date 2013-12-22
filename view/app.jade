@@ -7,12 +7,14 @@ html
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
 		link(rel="stylesheet", media="screen", href="/lib/bootstrap.css")
-		script(data-main="assets.js", src="/lib/require.js")
+		link(rel="stylesheet", media="screen", href="/css/styles.css")
+		script(data-main="/app/assets.js", src="/lib/require.js")
 	body
 
-		.wrap
+		#wrap: #content
 
 			.chron-navbar
+				include navbar
 
 			.ng-view.container
 
@@ -25,4 +27,6 @@ html
 					the page. If the application still isn't loading, contact the
 					developer.
 
-		.chron-footer
+		#footer
+			.chron-footer
+				include footer

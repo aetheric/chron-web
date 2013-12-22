@@ -13,20 +13,21 @@ block content
 
 		.col-md-4
 			h3 Classical
-			form.form-horizontal
+			form.form-horizontal(role='form')
 
-				.control-group
-					label.control-label(for='username') Username
-					.controls
+				.form-group
+					label.control-label.col-sm-3(for='username') Username
+					.col-sm-9
 						+input('username', 'text', 'Dalaraxis')
 
-				.control-group
-					label.control-label(for='password') Password
-					.controls
+				.form-group
+					label.control-label.col-sm-3(for='password') Password
+					.col-sm-9
 						+input('password', 'password', 'iamthelichking')
 
-				.form-actions
-					button.btn.btn-success(type='submit') Log-in
+				.form-group
+					.col-sm-offset-3.col-sm-9
+						button.btn.btn-success(type='submit') Log-in
 
 		.col-md-4
 			h3 Social

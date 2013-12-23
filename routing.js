@@ -17,8 +17,6 @@ module.exports = function(express) {
 	// Basic page rendering
 	express.get('/home', renderView('home', 'Home', null));
 	express.get('/about', renderView('about', 'About', null));
-	express.get('/register', renderView('register', 'Register', null));
-	express.get('/login', renderView('login', 'Log-in', null));
 	express.get('/app', renderView('app', null, '/pub/assets.js'));
 	
 	// Index page rendering
@@ -53,6 +51,24 @@ module.exports = function(express) {
 			script: null
 		});
 	});
+
+	express.get('/register', function(req, res) {
+		res.render('register', {
+			title: 'Register',
+			script: null,
+			error: req.query.error,
+			user: req.query.user
+		});
+	});
+	
+	express.get('/login', function(req, res) {
+		res.render('login', {
+			title: 'Log-in',
+			script: null,
+			error: req.query.error,
+			user: req.query.user
+		});
+	});
 	
 	express.post('/login', function(req, res) {
 		var user = req.body.username;
@@ -63,12 +79,12 @@ module.exports = function(express) {
 
 		var pass = req.body.password;
 		if (!pass) {
-			res.redirect('/login?error=pass');
+			res.redirect('/login?error=pass&user=' + user);
 			return;
 		}
 
 		if (user !== 'Dalaraxis' || pass !== 'iamthelichking') {
-			res.redirect('/login?error=cred');
+			res.redirect('/login?error=cred&user=user');
 			return;
 		}
 		

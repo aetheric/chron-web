@@ -55,6 +55,23 @@ module.exports = function(express) {
 	});
 	
 	express.post('/login', function(req, res) {
+		var user = req.body.username;
+		if (!user) {
+			res.redirect('/login?error=user');
+			return;
+		}
+
+		var pass = req.body.password;
+		if (!pass) {
+			res.redirect('/login?error=pass');
+			return;
+		}
+
+		if (user !== 'Dalaraxis' || pass !== 'iamthelichking') {
+			res.redirect('/login?error=cred');
+			return;
+		}
+		
 		res.redirect('/app');
 	});
 	

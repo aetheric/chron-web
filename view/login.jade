@@ -1,7 +1,7 @@
 extends layout
 
 mixin input(id, type, placeholder)
-	input(id='#{id}', type='#{type}', placeholder='#{placeholder}')
+	input(id='#{id}', name='#{id}', type='#{type}', placeholder='#{placeholder}')
 
 block content
 
@@ -13,7 +13,7 @@ block content
 
 		.col-md-4
 			h3 Classical
-			form.form-horizontal(role='form')
+			form.form-horizontal(role='form', method='post')
 
 				.form-group
 					label.control-label.col-sm-3(for='username') Username

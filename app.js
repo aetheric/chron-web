@@ -11,6 +11,15 @@ require('./assets')(express);
 require('./routing')(express);
 
 // Start the server
-express.listen(port, function() {
-	console.log("Express listening on port ", port);
+console.log("Express starting on port ", port);
+var server = require('http')
+	.createServer(express)
+	.listen(port);
+
+// Start a repl for easy eval/shutdown
+require('repl').start({
+	input: process.stdin,
+	output: process.stdout
+}).on('exit', function() {
+	server.close();
 });

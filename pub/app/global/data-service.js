@@ -12,6 +12,6 @@ define([
 	return chron.service('_data', [
 		'$http',
 		service
-	]]);
+	]);
 
 });

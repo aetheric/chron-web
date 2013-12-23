@@ -69,17 +69,34 @@ require.config({
 
 		underscore: {
 			exports: '_'
+		},
+
+		underscore_string: {
+			deps: [ 'underscore' ],
+			init: function(underscore) {
+				return underscore.str;
+			}
 		}
 
 	},
 
 	deps: [
+
+		//underscore bootstrapping
+		'underscore',
+		'underscore_string',
+
+		// Angular bootstrapping
 		'angular',
 		'app/chron-config',
+
+		// Global directives
 		'app/global/navbar'
+
 	],
 
-	callback: function(angular, chron) {
+	callback: function(underscore, underscore_string, angular, chron) {
+		underscore.mixin(underscore_string.exports());
 		angular.bootstrap(document, [ 'chron' ]);
 	}
 

@@ -1,9 +1,8 @@
 define([
 	'underscore',
-	'underscore_string',
 	'app/chron',
 	'text!view/navbar.html'
-], function(_, _s, chron, view) {
+], function(_, chron, view) {
 
 	function controller($scope, $location) {
 
@@ -37,8 +36,9 @@ define([
 		});
 
 		$scope.$watch('$locationChangeSuccess', function() {
+			var newPath = $location.path();
 			_.each($scope.navigation.primary, function(value) {
-				value.active = _s.startsWith($location.path(), value.path);
+				value.active = _(value.path).startsWith(newPath);
 			});
 		});
 
@@ -57,10 +57,11 @@ define([
 			'$location',
 			controller
 		]
+
 	};
 
 	return chron.directive('chronNavbar', function() {
-		return directive
+		return directive;
 	});
 
 });

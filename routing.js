@@ -8,10 +8,6 @@ module.exports = function(express) {
 			});
 		};
 	}
-	
-	function detailLink(id, slug) {
-		return '/detail/' + id + '/' + slug
-	}
 
 	// Redirect root requests to the home page.
 	express.get('/', function(req, res) {
@@ -58,13 +54,12 @@ module.exports = function(express) {
 		});
 	});
 	
+	express.post('/login', function(req, res) {
+		res.redirect('/app');
+	});
+	
 	// Detail page rendering
 	require('./routing_detail')(express);
-
-	// Set up generic view renderer.
-	express.get('/view/:viewName', function(req, res) {
-		res.render(req.params.viewName);
-	});
 	
 	express.use(function(req, res) {
 		res.status(404);

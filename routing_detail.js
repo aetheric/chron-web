@@ -1,5 +1,9 @@
 module.exports = function(express) {
 
+	function detailLink(id, slug) {
+		return '/detail/' + id + '/' + slug
+	}
+
 	express.get('/detail/:detailId?/:detailSlug?', function(req, res) {
 
 		var requestId = req.params.detailId;

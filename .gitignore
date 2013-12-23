@@ -1,6 +1,7 @@
 /node_modules
 /cache
 *.iml
+workspace
 *.ipr
 *.swp
 *.swo

@@ -13,10 +13,10 @@ html
 
 		#wrap: #content
 
-			.chron-navbar
+			.directive(chron-navbar)
 				include navbar
 
-			.ng-view.container
+			.container(ng-view)
 
 				.page-header
 					h1 Chronicler is loading <small>please be patient</small>
@@ -28,5 +28,5 @@ html
 					developer.
 
 		#footer
-			.chron-footer
+			.directive(chron-footer)
 				include footer

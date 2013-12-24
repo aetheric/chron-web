@@ -1,4 +1,5 @@
 module.exports = function(express) {
+	var register = require('./data').registerClassic;
 
 	express.get('/register', function(req, res) {
 		res.render('register', {
@@ -36,17 +37,27 @@ module.exports = function(express) {
 			return;
 		}
 
-		if (user === 'Dalaraxis') {
-			res.redirect('/register?error=cred-user&email=' + mail);
-			return;
+		try {
+			var id = register(user, pass, mail);
+			if (!id) {
+				res.redirect('/register?error=miss&user=' + user + '&mail=' + mail);
+				return;
+			}
+			
+			res.redirect('/app');
+		} catch (error) {
+			switch(error) {
+				case 'user':
+					res.redirect('/register?error=cred-user&mail=' + mail);
+					return;
+				case 'mail':
+					res.redirect('/register?error=cred-mail&user=' + user);
+					return;
+				default:
+					res.redirect('/register?error=' + error + '&user=' + user + '&mail=' + mail);
+					return;
+			}
 		}
-
-		if(mail === 'special@snowflake.com') {
-			res.redirect('/register?error=cred-mail&user=' + user);
-			return;
-		}
-
-		res.redirect('/app');
 	});
 
 }

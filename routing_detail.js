@@ -1,4 +1,5 @@
 module.exports = function(express) {
+	var retrieve = require('./data').indexDetail;
 
 	function detailLink(id, slug) {
 		return '/detail/' + id + '/' + slug
@@ -16,11 +17,7 @@ module.exports = function(express) {
 		}
 
 		// Retrieve detail item by req.params.detailId.
-		var detailItem = ( requestId == 5 ? {
-			id: req.params.detailId,
-			slug: 'other-slug',
-			title: 'Test Detail Item'
-		} : null );
+		var detailItem = retrieve(requestId);
 
 		if (!detailItem) {
 			res.render('detail_missing', {

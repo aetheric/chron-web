@@ -1,4 +1,5 @@
 module.exports = function(express) {
+	var login = require('./data').loginClassic;
 
 	express.get('/login', function(req, res) {
 		res.render('login', {
@@ -9,6 +10,7 @@ module.exports = function(express) {
 	});
 	
 	express.post('/login', function(req, res) {
+
 		var user = req.body.username;
 		if (!user) {
 			res.redirect('/login?error=user');
@@ -21,8 +23,10 @@ module.exports = function(express) {
 			return;
 		}
 
-		if (user !== 'Dalaraxis' || pass !== 'iamthelichking') {
-			res.redirect('/login?error=cred&user=user');
+		var id = login(user, pass);
+
+		if (!id) {
+			res.redirect('/login?error=cred&user=' + user);
 			return;
 		}
 		

@@ -9,7 +9,6 @@ module.exports = function(express) {
 		var requestId = req.params.detailId;
 		if (!requestId) {
 			res.render('detail_missing', {
-				itemId: null,
 				title: 'Details Missing'
 			});
 
@@ -26,8 +25,7 @@ module.exports = function(express) {
 		if (!detailItem) {
 			res.render('detail_missing', {
 				itemId: requestId,
-				title: 'Details Missing',
-				script: null
+				title: 'Details Missing'
 			});
 
 			return;
@@ -42,8 +40,7 @@ module.exports = function(express) {
 
 		res.render('detail', {
 			item: detailItem,
-			title: detailItem.title,
-			script: null
+			title: detailItem.title
 		});
 	});
 

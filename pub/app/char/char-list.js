@@ -1,10 +1,11 @@
 define([
 	'underscore',
 	'app/chron',
-	'text!view/char-list.html'
+	'text!view/char-list.html',
+	'app/global/data-service'
 ], function(_, chron, view) {
 
-	function controller($scope) {
+	function controller($scope, _data) {
 
 		_.extend($scope, {
 
@@ -41,6 +42,16 @@ define([
 
 			});
 		});
+		
+		_data.request('get', '/char/list', {
+			// No request params
+		}, {
+			// No body params
+		}, function() {
+			// success
+		}, function() {
+			// failure
+		});
 
 	}
 
@@ -57,6 +68,7 @@ define([
 
 		controller: [
 			'$scope',
+			'_data',
 			controller
 		]
 

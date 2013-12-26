@@ -6,7 +6,7 @@ define([
 	'text!view/char.html'
 ], function(chron, dashCtrl, dashView, charCtrl, charView) {
 	
-	function chronConfig($routeProvider) {
+	function chronConfig($routeProvider, WebSocketProvider) {
 
 		$routeProvider
 
@@ -27,10 +27,15 @@ define([
 				redirectTo: '/dash'
 			});
 
+		WebSocketProvider
+			.prefix('')
+			.uri('ws://echo.websocket.org/');
+
 	}
 	
 	return chron.config([
 		'$routeProvider',
+		'WebSocketProvider',
 		chronConfig
 	]);
 

@@ -32,7 +32,11 @@ require.config({
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-mocks',
 			'lib/angular-mocks'
 		],
-		
+
+		angular_websocket: [
+			'lib/angular-websocket'
+		]
+
 		text: [
 			'//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.10/text',
 			'lib/text'
@@ -66,6 +70,13 @@ require.config({
 				return angular.module('ngMock');
 			}
 		},
+
+		angular_websocket: {
+			deps: [ 'angular' ],
+			init: function(angular) {
+				return angular.module('angular-websocket')
+			}
+		}
 
 		underscore: {
 			exports: '_'

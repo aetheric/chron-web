@@ -13,13 +13,13 @@ define([
 			// Routing for the dashboard view.
 			.when('/dash', {
 				template: dashView,
-				controller: dashCtrl
+				controller: 'DashController'
 			})
 
 			// Routing for the character manager.
 			.when('/char', {
 				template: charView,
-				controller: charCtrl
+				controller: 'CharController'
 			})
 
 			// Just redirect to the dashboard in all other cases.

@@ -1,11 +1,11 @@
 define([
 	'underscore',
 	'app/chron',
-	'text!view/char-list.html',
-	'app/global/data-service'
+	'text!view/char-list.html'
 ], function(_, chron, view) {
 
-	function controller($scope, _data) {
+	function controller($scope, socket) {
+		var listUpdated = null;
 
 		_.extend($scope, {
 
@@ -33,24 +33,34 @@ define([
 
 		});
 
-		$scope.$watch('list', function(oldVal, newVal) {
+		$scope.$watch('list', function() {
 			_.extend($scope.flags, {
 
-				loading: newVal == null,
+				loading: $scope.list == null,
 
-				empty: newVal && !newVal.length
+				empty: ( $scope.list && !$scope.list.length )
 
 			});
 		});
-		
-		_data.request('get', '/char/list', {
-			// No request params
-		}, {
-			// No body params
-		}, function() {
-			// success
-		}, function() {
-			// failure
+
+		socket.on('open', function() {
+			socket.send({
+				key: 'char-list',
+				updated: listUpdated,
+				payload: [
+					[ 'game', 'updated' ],
+					[ 'char', 'name' ]
+				]
+			});
+		});
+
+		socket.on('message', function(event) {
+			var message = event.data;
+			if (message.key && message.key === 'char-list') {
+				if ($scope.list == null || listUpdated == null || listUpdated < message.updated) {
+					$scope.list = message.payload;
+				}
+			}
 		});
 
 	}
@@ -62,13 +72,13 @@ define([
 		scope: {
 
 			/** The currently selected character (if any) */
-			selectedCharacter: '='
+			selected: '='
 
 		},
 
 		controller: [
 			'$scope',
-			'_data',
+			'WebSocket',
 			controller
 		]
 

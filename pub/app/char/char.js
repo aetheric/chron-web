@@ -7,25 +7,8 @@ define([
 	function controller($scope) {
 		_.extend($scope, {
 
-			/** Used to store api-dependant data */
-			data: {
-
-				/** Options for ordering results */
-				orderingOptions: [],
-
-				/** The selected ordering for characters */
-				characterOrdering: [],
-
-				/** The selected ordering for chronicles */
-				chronicleOrdering: [],
-
-				// List of characters the user has
-				characterList: []
-
-			},
-
-			// The currently selected character
-			selectedCharacter: null
+			/** The currently selected character */
+			selected: null
 
 		});
 	}

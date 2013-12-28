@@ -1,11 +1,11 @@
 define([
 	'underscore',
 	'app/chron',
-	'text!view/char-list.html'
+	'text!view/char-list.html',
+	'app/service/socket'
 ], function(_, chron, view) {
 
-	function controller($scope, socket) {
-		var listUpdated = null;
+	function controller($scope, _socket) {
 
 		_.extend($scope, {
 
@@ -43,24 +43,29 @@ define([
 			});
 		});
 
-		socket.on('open', function() {
-			socket.send({
-				key: 'char-list',
-				updated: listUpdated,
-				payload: [
-					[ 'game', 'updated' ],
-					[ 'char', 'name' ]
-				]
-			});
-		});
-
-		socket.on('message', function(event) {
-			var message = event.data;
-			if (message.key && message.key === 'char-list') {
-				if ($scope.list == null || listUpdated == null || listUpdated < message.updated) {
-					$scope.list = message.payload;
+		_socket.listen($scope, 'list', 'char-list', function() {
+			_socket.send('char-list', [
+				{
+					display: 'Saint Wolfgang\'s Vampire Hunters',
+					characters: [
+						{ id: 1, display: 'Father Eric Mathias' }
+					]
+				},
+				{
+					display: 'Teonn',
+					characters: [
+						{ id: 2, display: 'Bartimas' },
+						{ id: 3, display: 'Royal Herald' },
+						{ id: 4, display: 'Sir Charleston' }
+					]
+				},
+				{
+					display: 'Crucible',
+					characters: [
+						{ id: 5, display: 'Enoch Anderheim' }
+					]
 				}
-			}
+			]);
 		});
 
 	}
@@ -78,7 +83,7 @@ define([
 
 		controller: [
 			'$scope',
-			'WebSocket',
+			'_socket',
 			controller
 		]
 

@@ -120,7 +120,7 @@ define([
 		};
 	}
 
-	return chron.service('_data', [
+	return chron.service('_http', [
 		'$http',
 		'$rootScope',
 		'$location',

@@ -41,6 +41,11 @@ require.config({
 		text: [
 			'//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.10/text',
 			'lib/text'
+		],
+
+		json: [
+			'//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min',
+			'lib/json2'
 		]
 
 	},
@@ -88,6 +93,10 @@ require.config({
 			init: function(underscore) {
 				return underscore.str;
 			}
+		},
+
+		json: {
+			exports: 'JSON'
 		}
 
 	},
@@ -97,6 +106,7 @@ require.config({
 		//underscore bootstrapping
 		'underscore',
 		'underscore_string',
+		'json',
 
 		// Angular bootstrapping
 		'angular',
@@ -107,8 +117,13 @@ require.config({
 
 	],
 
-	callback: function(underscore, underscore_string, angular, chron) {
+	callback: function(underscore, underscore_string, json, angular, chron) {
 		underscore.mixin(underscore_string.exports());
+		underscore.mixin({
+			toJson: json.stringify,
+			fromJson: json.parse
+		});
+
 		angular.bootstrap(document, [ 'chron' ]);
 	}
 

@@ -2,6 +2,7 @@
 
 // initialise the context and port vars
 var port = process.env.PORT || 8012;
+var env = process.env.NODE_ENV || 'development';
 
 // init and set up express.
 var express = require('./express')();
@@ -11,9 +12,10 @@ require('./assets')(express);
 require('./routing')(express);
 
 // Start the server
+console.log("Starting server in ", env);
 console.log("Express starting on port ", port);
 
-if ('prod'.indexOf(process.env.NODE_ENV) < 0) {
+if ('prod'.indexOf(env) < 0) {
 
 	var server = require('http')
 		.createServer(express)

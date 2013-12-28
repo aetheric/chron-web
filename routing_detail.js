@@ -26,7 +26,7 @@ module.exports = function(express) {
 			});
 
 			return;
-		};
+		}
 		
 		// if detail slug is missing / incorrect, permanent redirect to correct slug.
 		var requestSlug = req.params.detailSlug;

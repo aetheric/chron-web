@@ -1,7 +1,7 @@
 module.exports = function(express) {
 
 	express.get('/app', function(req, res) {
-		res.render('about', {
+		res.render('app', {
 			script: '/pub/assets.js'
 		});
 	});

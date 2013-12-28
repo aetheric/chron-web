@@ -19,6 +19,8 @@ if ('prod'.indexOf(process.env.NODE_ENV) < 0) {
 		.createServer(express)
 		.listen(port);
 
+	console.log("Starting REPL...");
+
 	// Start a repl for easy eval/shutdown
 	require('repl').start({
 		input: process.stdin,

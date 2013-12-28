@@ -33,4 +33,4 @@ module.exports = function(express) {
 		res.redirect('/app');
 	});
 
-}
+};

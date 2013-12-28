@@ -34,8 +34,9 @@ require.config({
 		],
 
 		angular_websocket: [
+			'//raw.github.com/gdi2290/angular-websocket/master/angular-websocket',
 			'lib/angular-websocket'
-		]
+		],
 
 		text: [
 			'//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.10/text',
@@ -76,7 +77,7 @@ require.config({
 			init: function(angular) {
 				return angular.module('angular-websocket')
 			}
-		}
+		},
 
 		underscore: {
 			exports: '_'

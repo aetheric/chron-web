@@ -16,7 +16,10 @@ console.log("Starting server in ", env);
 console.log("Express starting on port ", port);
 
 if ('prod'.indexOf(env) < 0) {
+	// When running on production...
+	express.listen(port);
 
+} else {
 	var server = require('http')
 		.createServer(express)
 		.listen(port);
@@ -30,8 +33,4 @@ if ('prod'.indexOf(env) < 0) {
 	}).on('exit', function () {
 		server.close();
 	});
-
-} else {
-	// When running on production...
-	express.listen(port);
 }

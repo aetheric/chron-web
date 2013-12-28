@@ -5,13 +5,13 @@ module.exports = function(express) {
 		res.redirect(301, '/home');
 	});
 
-	require('./routing_home')(express);
-	require('./routing_index')(express);
-	require('./routing_detail')(express);
-	require('./routing_register')(express);
-	require('./routing_about')(express);
-	require('./routing_login')(express);
-	require('./routing_app')(express);
+	require('./routes/home')(express);
+	require('./routes/index')(express);
+	require('./routes/detail')(express);
+	require('./routes/register')(express);
+	require('./routes/about')(express);
+	require('./routes/login')(express);
+	require('./routes/app')(express);
 
 	// Handle requests that don't get routed.
 	express.use(function(req, res) {

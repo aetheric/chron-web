@@ -1,5 +1,5 @@
 module.exports = function(express) {
-	var retrieve = require('./data').indexDetail;
+	var retrieve = require('./../data').indexDetail;
 
 	function detailLink(id, slug) {
 		return '/detail/' + id + '/' + slug

@@ -1,5 +1,5 @@
 module.exports = function(express) {
-	var login = require('./data').loginClassic;
+	var login = require('./../data').loginClassic;
 
 	express.get('/login', function(req, res) {
 		res.render('login', {

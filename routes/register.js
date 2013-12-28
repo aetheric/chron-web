@@ -1,5 +1,5 @@
 module.exports = function(express) {
-	var register = require('./data').registerClassic;
+	var register = require('./../data').registerClassic;
 
 	express.get('/register', function(req, res) {
 		res.render('register', {

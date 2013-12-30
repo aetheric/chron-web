@@ -43,29 +43,8 @@ define([
 			});
 		});
 
-		_socket.listen($scope, 'list', 'char-list', function() {
-			_socket.send('char-list', [
-				{
-					display: 'Saint Wolfgang\'s Vampire Hunters',
-					characters: [
-						{ id: 1, display: 'Father Eric Mathias' }
-					]
-				},
-				{
-					display: 'Teonn',
-					characters: [
-						{ id: 2, display: 'Bartimas' },
-						{ id: 3, display: 'Royal Herald' },
-						{ id: 4, display: 'Sir Charleston' }
-					]
-				},
-				{
-					display: 'Crucible',
-					characters: [
-						{ id: 5, display: 'Enoch Anderheim' }
-					]
-				}
-			]);
+		_socket.link($scope, 'list', 'char-list', function() {
+			_socket.send('char-list', {});
 		});
 
 	}

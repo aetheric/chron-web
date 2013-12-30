@@ -5,6 +5,7 @@ define([
 
 	function service(socket) {
 
+		var user = null;
 		var data = {};
 
 		function needsUpdate(key, updated) {
@@ -47,10 +48,14 @@ define([
 
 		socket.on('message', function(event) {
 			var message = _.fromJson(event.data);
+			if (message && _.isNumber(message.user)) {
+				user = message.user;
+			}
+
 			update(message.key, message.payload, message.updated);
 		});
 
-		function listen($scope, target, id, initial) {
+		function link($scope, target, id, initial) {
 			var entry = ensure(id);
 			entry.targets.push({
 				scope: $scope,
@@ -64,14 +69,15 @@ define([
 
 		function send(key, message) {
 			socket.send(_.toJson({
+				user: user,
 				key: key,
-				updated: new Date(),
+//				updated: new Date(),
 				payload: message
 			}));
 		}
 
 		return {
-			listen: listen,
+			link: link,
 			send: send
 		}
 	}

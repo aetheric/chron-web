@@ -46,6 +46,11 @@ require.config({
 		json: [
 			'//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min',
 			'lib/json2'
+		],
+
+		sockete: [
+//			'//raw.github.com/ismasan/Sockete/master/dist/0.0.1/sockete.min',
+			'lib/sockete'
 		]
 
 	},
@@ -97,6 +102,10 @@ require.config({
 
 		json: {
 			exports: 'JSON'
+		},
+
+		sockete: {
+			exports: 'Sockete'
 		}
 
 	},
@@ -113,7 +122,10 @@ require.config({
 		'app/chron-config',
 
 		// Global directives
-		'app/global/navbar'
+		'app/global/navbar',
+
+		// Dev code
+		'app/dev/mocks'
 
 	],
 

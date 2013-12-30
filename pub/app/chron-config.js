@@ -29,7 +29,7 @@ define([
 
 		WebSocketProvider
 			.prefix('')
-			.uri('ws://echo.websocket.org/');
+			.uri('ws://chron.aetheric.co.nz');
 
 	}
 	

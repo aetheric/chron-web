@@ -12,6 +12,9 @@ define([
 			/** A list of lists of characters */
 			list: null,
 
+			/** The currently selected character */
+			selectedCharacter: null,
+
 			flags: {
 
 				/** The application is currently loading data */
@@ -25,12 +28,24 @@ define([
 			select: function($event, character) {
 				$event.preventDefault();
 
-				$scope.selectedCharacter.active = false;
+				if ($scope.selectedCharacter === character) {
+					return; // do nothing if the same.
+				}
 
-				character.active = true;
+				if ($scope.selectedCharacter) {
+					$scope.selectedCharacter.active = false;
+				}
+
 				$scope.selectedCharacter = character;
+				$scope.selectedCharacter.active = true;
 			}
 
+		});
+
+		$scope.$watch('selectedCharacter', function() {
+			if ($scope.selectedCharacter && $scope.selectedCharacter.id) {
+				$scope.selected = $scope.selectedCharacter.id;
+			}
 		});
 
 		$scope.$watch('list', function() {
@@ -55,7 +70,7 @@ define([
 
 		scope: {
 
-			/** The currently selected character (if any) */
+			/** The currently selected character id (if any) */
 			selected: '='
 
 		},

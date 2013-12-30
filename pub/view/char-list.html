@@ -8,13 +8,13 @@
 		<p>No characters are currently available</p>
 	</div>
 
-	<ul ng-show="list">
+	<ul class="nav nav-pills nav-stacked" ng-show="list">
 		<li ng-repeat="group in list"
 		    ng-class="{ active: group.active }">
 
 			<span>{{ group.display }}</span>
 
-			<ul>
+			<ul class="nav nav-pills nav-stacked" ng-show="group.characters">
 				<li ng-repeat="character in group.characters"
 				    ng-class="{ active: character.active }">
 

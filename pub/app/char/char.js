@@ -1,7 +1,9 @@
 define([
 	'underscore',
 	'app/chron',
-	'app/char/char-list'
+
+	'app/char/char-list',
+	'app/char/char-view'
 ], function(_, chron) {
 
 	function controller($scope) {

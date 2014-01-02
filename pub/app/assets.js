@@ -96,12 +96,22 @@ require.config({
 		underscore_string: {
 			deps: [ 'underscore' ],
 			init: function(underscore) {
-				return underscore.str;
+				underscore.mixin(underscore.str.exports());
+				return underscore;
 			}
 		},
 
 		json: {
-			exports: 'JSON'
+			deps: [ 'underscore' ],
+			exports: 'JSON',
+			init: function(underscore) {
+				underscore.mixin({
+					toJson: this.JSON.stringify,
+					fromJson: this.JSON.parse
+				});
+
+				return underscore;
+			}
 		},
 
 		sockete: {
@@ -112,14 +122,14 @@ require.config({
 
 	deps: [
 
+		// Angular bootstrapping
+		'angular',
+		'app/chron-config',
+
 		//underscore bootstrapping
 		'underscore',
 		'underscore_string',
 		'json',
-
-		// Angular bootstrapping
-		'angular',
-		'app/chron-config',
 
 		// Global directives
 		'app/global/navbar',
@@ -129,13 +139,7 @@ require.config({
 
 	],
 
-	callback: function(underscore, underscore_string, json, angular, chron) {
-		underscore.mixin(underscore_string.exports());
-		underscore.mixin({
-			toJson: json.stringify,
-			fromJson: json.parse
-		});
-
+	callback: function(angular, chron) {
 		angular.bootstrap(document, [ 'chron' ]);
 	}
 

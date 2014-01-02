@@ -1,15 +1,19 @@
 define([
-	'sockete',
-	'json'
-], function(sockete, json) {
+	'underscore',
+	'sockete'
+], function(_, sockete) {
+
+	function jsonPredicate(predicate) {
+		return function(json) {
+			return predicate(_.fromJson(json));
+		}
+	}
 
 	sockete.Server.configure('ws://chron.aetheric.co.nz', function() {
 
-		this.onmessage(json.stringify({
-			user: 1,
-			key: 'char-list',
-			payload: {}
-		})).respond(json.stringify({
+		this.onmessage(jsonPredicate(function(message) {
+			return message.key === 'char-list';
+		})).respond(_.toJson({
 			user: 1,
 			key: 'char-list',
 			updated: new Date(),
@@ -40,15 +44,13 @@ define([
 			]
 		}));
 
-		this.onmessage(json.stringify({
+		this.onmessage(jsonPredicate(function(message) {
+			return message.key === 'char-view'
+				&& message.payload
+				&& message.payload.id === 1;
+		})).respond(_.toJson({
 			user: 1,
 			key: 'char-view',
-			payload: {
-				id: 1
-			}
-		})).respond(json.stringify({
-			user: 1,
-			key: 'char-list',
 			updated: new Date(),
 			payload: {
 				id: 1,
@@ -62,7 +64,29 @@ define([
 					//
 				]
 			}
-		}))
+		}));
+
+		this.onmessage(jsonPredicate(function(message) {
+			return message.key === 'char-view'
+				&& message.payload
+				&& message.payload.id === 2;
+		})).respond(_.toJson({
+			user: 1,
+			key: 'char-view',
+			updated: new Date(),
+			payload: {
+				id: 2,
+				name: 'Bartimas',
+				type: 'crew',
+				game: {
+					id: 2,
+					name: 'Teonn'
+				},
+				data: [
+					//
+				]
+			}
+		}));
 
 	});
 

@@ -169,7 +169,24 @@ var Sockete = (function () {
     },
     // Public methods
     match: function (request) {
-      return request.request_type == this.event_type;
+
+      // Duck out early if easy checks fail.
+      if (request.request_type != this.event_type || !this.message) {
+        return false;
+      }
+
+      // Predicate matching.
+      if (typeof this.message === 'function') {
+        return this.message(request.message);
+      }
+
+      // Regexp matching.
+      if (typeof this.message.test === 'function') {
+        return this.message.test(request.message);
+      }
+
+      // String compare.
+      return this.message === request.message;
     },
     
     response: function (client) {

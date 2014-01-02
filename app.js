@@ -1,5 +1,8 @@
 'use strict';
 
+// Start up newrelic monitoring
+require('newrelic');
+
 // initialise the context and port vars
 var port = process.env.PORT || 8012;
 var env = process.env.NODE_ENV || 'development';

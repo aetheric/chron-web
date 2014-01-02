@@ -30,7 +30,7 @@ define([
 		}
 
 		function update(key, payload, updated) {
-			if (!key || !payload || !updated || !needsUpdate(key, updated)) {
+			if (!key || !updated || !needsUpdate(key, updated)) {
 				return;
 			}
 
@@ -71,7 +71,7 @@ define([
 			socket.send(_.toJson({
 				user: user,
 				key: key,
-//				updated: new Date(),
+				updated: new Date(),
 				payload: message
 			}));
 		}

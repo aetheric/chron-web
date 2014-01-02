@@ -1,6 +1,8 @@
 define([
 	'underscore',
-	'sockete'
+	'sockete',
+
+	'json'
 ], function(_, sockete) {
 
 	function jsonPredicate(predicate) {
@@ -54,15 +56,14 @@ define([
 			updated: new Date(),
 			payload: {
 				id: 1,
-				name: 'Father Eric Mathias',
-				type: 'player',
-				game: {
-					id: 1,
-					name: 'St. Wolfgang\'s Vampire Hunters'
-				},
-				data: [
-					//
-				]
+				summary: {
+					name: 'Father Eric Mathias',
+					type: 'player',
+					game: {
+						id: 1,
+						name: 'St. Wolfgang\'s Vampire Hunters'
+					}
+				}
 			}
 		}));
 
@@ -76,16 +77,24 @@ define([
 			updated: new Date(),
 			payload: {
 				id: 2,
-				name: 'Bartimas',
-				type: 'crew',
-				game: {
-					id: 2,
-					name: 'Teonn'
-				},
-				data: [
-					//
-				]
+				summary: {
+					name: 'Bartimas',
+					type: 'crew',
+					game: {
+						id: 2,
+						name: 'Teonn'
+					}
+				}
 			}
+		}));
+
+		this.onmessage(jsonPredicate(function(message) {
+			return message.key === 'char-view';
+		})).respond(_.toJson({
+			user: 1,
+			key: 'char-view',
+			updated: new Date(),
+			payload: {}
 		}));
 
 	});

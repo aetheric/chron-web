@@ -1,8 +1,31 @@
 <div class="char-view">
 
-	<div ng-show="character">
-		<h1>{{character.name}}<small>{{character.type}}</small></h1>
-		<p>{{character.game.name}}</p>
+	<div class="panel panel-default" ng-show="flags.showDetail">
+
+		<div class="panel-heading">
+			<ul class="nav nav-pills">
+
+				<li ng-class="{ active: character.summary && character.summary.active }" ng-show="character.summary">
+					<a href="#" ng-click="select($event, character.summary)">Summary</a>
+				</li>
+
+			</ul>
+		</div>
+
+		<div class="panel-body">
+
+			<div chron-char-view-summary ng-show="character.summary" summary="character.summary"></div>
+
+		</div>
+
+	</div>
+
+	<div ng-show="flags.showMissing">
+		<h1>No data for character.</h1>
+	</div>
+
+	<div ng-show="flags.showIntro">
+		<h2>Select a Character</h2>
 	</div>
 
 </div>

@@ -56,3 +56,16 @@ body:before {
 	padding-bottom: 0;
 	margin: 0 0 10px;
 }
+
+.char-view-story ul.entries li.entry .controls {
+	overflow: hidden;
+	border-top: 1px solid #eeeeee;
+	padding-top: 5px;
+}
+
+.char-view-story ul.entries li.entry.well:hover,
+.char-view-story ul.entries li.entry.well.active {
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}

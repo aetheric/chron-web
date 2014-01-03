@@ -68,7 +68,22 @@ define([
 					//
 				},
 				story: {
-					//
+					entries: [
+						{
+							title: 'Backstory',
+							date: '1626',
+							text: 'It was a dark and stormy night. The night was dark, and the sky was stormy.'
+						},
+						{
+							title: 'Investigation',
+							date: '1628',
+							text: 'There was some stuff I did. It turned out better than expected.'
+						},
+						{
+							title: 'The next day',
+							date: '1628.1'
+						}
+					]
 				},
 				actions: {
 					//

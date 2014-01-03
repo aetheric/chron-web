@@ -7,7 +7,24 @@ define([
 	function controller($scope) {
 
 		_.extend($scope, {
-			//
+
+			selectedItem: null,
+
+			select: function($event, item) {
+				$event.preventDefault();
+
+				if (!item || item === $scope.selectedItem) {
+					return;
+				}
+
+				if ($scope.selectedItem) {
+					$scope.selectedItem.active = false;
+				}
+
+				$scope.selectedItem = item;
+				$scope.selectedItem.active = true;
+			}
+
 		});
 
 	}

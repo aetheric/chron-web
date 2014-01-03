@@ -2,26 +2,23 @@
 
 	<ul class="entries">
 
-		<li class="entry well well-sm">
+		<li class="entry well well-sm"
+		    ng-repeat="entry in story.entries"
+			ng-class="{ active: entry.active }"
+			ng-click="select($event, entry)">
+
 			<div class="page-header">
 				<h4>
-					Title
-					<small class="pull-right">date</small>
+					{{ entry.title }}
+					<small class="pull-right">{{ entry.date }}</small>
 				</h4>
 			</div>
 
-			<p>Entry of story text.</p>
-		</li>
+			<p ng-show="entry.text">{{ entry.text }}</p>
 
-		<li class="entry well well-sm">
-			<div class="page-header">
-				<h4>
-					Title
-					<small class="pull-right">date</small>
-				</h4>
-			</div>
+			<div class="alert alert-warning"
+			     ng-hide="entry.text">This entry needs content.</div>
 
-			<p>Entry of story text.</p>
 		</li>
 
 	</ul>

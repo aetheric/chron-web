@@ -43,3 +43,16 @@ body:before {
 	margin-top: 11px;
 	margin-bottom: 10px;
 }
+
+/* Allow for more tightly packed story headers */
+
+.char-view-story ul.entries {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.char-view-story ul.entries li.entry .page-header {
+	padding-bottom: 0;
+	margin: 0 0 10px;
+}

@@ -4,7 +4,7 @@
 
 		<li class="entry well well-sm"
 		    ng-repeat="entry in story.entries"
-			ng-class="{ active: entry.active }"
+			ng-class="{ active: entry.active, empty: !entry.text }"
 			ng-click="select($event, entry)">
 
 			<div class="page-header">
@@ -16,8 +16,7 @@
 
 			<p ng-show="entry.text">{{ entry.text }}</p>
 
-			<div class="alert alert-warning"
-			     ng-hide="entry.text">This entry needs content.</div>
+			<p class="empty" ng-hide="entry.text">This entry needs content.</p>
 
 		</li>
 

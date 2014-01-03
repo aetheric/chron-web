@@ -63,6 +63,16 @@ body:before {
 	padding-top: 5px;
 }
 
+.char-view-story ul.entries li.entry.well.empty {
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
+
+.char-view-story ul.entries li.entry p.empty {
+	text-align: center;
+}
+
 .char-view-story ul.entries li.entry.well:hover,
 .char-view-story ul.entries li.entry.well.active {
 	color: #31708f;

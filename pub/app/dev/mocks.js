@@ -63,6 +63,15 @@ define([
 						id: 1,
 						name: 'St. Wolfgang\'s Vampire Hunters'
 					}
+				},
+				crunch: {
+					//
+				},
+				story: {
+					//
+				},
+				actions: {
+					//
 				}
 			}
 		}));

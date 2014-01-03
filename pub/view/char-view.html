@@ -9,12 +9,38 @@
 					<a href="#" ng-click="select($event, character.summary)">Summary</a>
 				</li>
 
+				<li ng-class="{ active: character.crunch && character.crunch.active }" ng-show="character.crunch">
+					<a href="#" ng-click="select($event, character.crunch)">Crunch</a>
+				</li>
+
+				<li ng-class="{ active: character.story && character.story.active }" ng-show="character.story">
+					<a href="#" ng-click="select($event, character.story)">Story</a>
+				</li>
+
+				<li ng-class="{ active: character.actions && character.actions.active }" ng-show="character.actions">
+					<a href="#" ng-click="select($event, character.actions)">Actions</a>
+				</li>
+
 			</ul>
 		</div>
 
 		<div class="panel-body">
 
-			<div chron-char-view-summary ng-show="character.summary" summary="character.summary"></div>
+			<div chron-char-view-summary
+			     ng-show="character.summary && character.summary.active"
+			     summary="character.summary"></div>
+
+			<div chron-char-view-crunch
+			     ng-show="character.crunch && character.crunch.active"
+			     crunch="character.crunch"></div>
+
+			<div chron-char-view-story
+			     ng-show="character.story && character.story.active"
+			     crunch="character.story"></div>
+
+			<div chron-char-view-actions
+			     ng-show="character.actions && character.actions.active"
+			     crunch="character.actions"></div>
 
 		</div>
 

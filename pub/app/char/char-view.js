@@ -4,6 +4,9 @@ define([
 	'text!view/char-view.html',
 
 	'app/service/socket',
+	'app/char/char-view-actions',
+	'app/char/char-view-crunch',
+	'app/char/char-view-story',
 	'app/char/char-view-summary'
 ], function(_, chron, view) {
 

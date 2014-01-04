@@ -12,6 +12,9 @@ define([
 			/** A list of lists of characters */
 			list: null,
 
+			/** The collected characters of the list */
+			characters: null,
+
 			/** The currently selected character */
 			selectedCharacter: null,
 
@@ -25,10 +28,10 @@ define([
 
 			},
 
-			select: function($event, character) {
-				$event.preventDefault();
+			select: function(character, $event) {
+				$event && $event.preventDefault();
 
-				if ($scope.selectedCharacter === character) {
+				if (!character || $scope.selectedCharacter === character) {
 					return; // do nothing if the same.
 				}
 
@@ -49,17 +52,27 @@ define([
 		});
 
 		$scope.$watch('list', function() {
+
 			_.extend($scope.flags, {
-
 				loading: $scope.list == null,
-
-				empty: ( $scope.list && !$scope.list.length )
-
+				empty: $scope.list && !$scope.list.length
 			});
+
+			$scope.characters = {};
+			_.each($scope.list, function(game) {
+				_.each(game.characters, function(character) {
+					$scope.characters[character.id] = character;
+				});
+			});
+
 		});
 
 		_socket.link($scope, 'list', 'char-list', function() {
 			_socket.send('char-list', {});
+		});
+
+		$scope.$watch('selected', function() {
+			$scope.select($scope.characters[$scope.selected]);
 		});
 
 	}

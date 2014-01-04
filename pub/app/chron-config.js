@@ -8,6 +8,27 @@ define([
 	
 	function chronConfig($routeProvider, WebSocketProvider) {
 
+		function charRoute(defaultParams) {
+			return {
+				template: charView,
+				controller: 'CharController',
+				resolve: {
+					_routeParams: [
+						'$rootScope',
+						'$route',
+						'$routeParams',
+						function($rootScope, $route, $routeParams) {
+							$rootScope.$watch('$routeChangeSuccess', function() {
+								_.defaults($routeParams, defaultParams || {});
+							});
+
+							return true;
+						}
+					]
+				}
+			};
+		}
+
 		$routeProvider
 
 			// Routing for the dashboard view.
@@ -17,10 +38,12 @@ define([
 			})
 
 			// Routing for the character manager.
-			.when('/char', {
-				template: charView,
-				controller: 'CharController'
-			})
+			.when('/char/:charId?', charRoute())
+
+			// Routing for the character manager story pane.
+			.when('/char/:charId/story/:entryId?', charRoute({
+				paneId: 'story'
+			}))
 
 			// Just redirect to the dashboard in all other cases.
 			.otherwise({

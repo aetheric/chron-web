@@ -10,7 +10,7 @@ define([
 	'app/char/char-view-summary'
 ], function(_, chron, view) {
 
-	function controller($scope, _socket) {
+	function controller($scope, _socket, $routeParams) {
 
 		_.extend($scope, {
 
@@ -29,10 +29,12 @@ define([
 
 			},
 
+			panes: null,
+
 			selectedPane: null,
 
-			select: function($event, pane) {
-				$event.preventDefault();
+			select: function(pane, $event) {
+				$event && $event.preventDefault();
 
 				if (!pane || pane === $scope.selectedPane) {
 					return;
@@ -64,14 +66,29 @@ define([
 				showIntro: _.isNull($scope.character)
 			});
 
-			if ($scope.character && $scope.character.summary) {
-				$scope.selectedPane = $scope.character.summary;
-				$scope.selectedPane.active = true;
-			} else if ($scope.selectedPane) {
-				$scope.selectedPane.active = false;
-				$scope.selectedPane = null;
+			if ($scope.character && $scope.character.panes) {
+				$scope.panes = {};
+
+				_.each($scope.character.panes, function(pane) {
+					$scope.panes[pane.id] = pane;
+				});
+
+				var pane = $scope.panes[$routeParams['paneId']] || _.first($scope.character.panes);
+				$scope.select(pane);
 			}
 
+		});
+
+		$scope.$watch('$locationChangeSuccess', function() {
+			var selectedPane = $routeParams['paneId'];
+
+			if (!$scope.panes || !selectedPane) {
+				return;
+			}
+
+			if (!$scope.selectedPane || $scope.selectedPane.id !== selectedPane) {
+				$scope.select($scope.panes[selectedPane]);
+			}
 		});
 
 	}
@@ -90,6 +107,7 @@ define([
 		controller: [
 			'$scope',
 			'_socket',
+			'$routeParams',
 			controller
 		]
 

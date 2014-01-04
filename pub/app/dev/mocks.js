@@ -56,38 +56,12 @@ define([
 			updated: new Date(),
 			payload: {
 				id: 1,
-				summary: {
-					name: 'Father Eric Mathias',
-					type: 'player',
-					game: {
-						id: 1,
-						name: 'St. Wolfgang\'s Vampire Hunters'
-					}
-				},
-				crunch: {
-					//
-				},
-				story: {
-					entries: [
-						{
-							title: 'Backstory',
-							date: '1626',
-							text: 'It was a dark and stormy night. The night was dark, and the sky was stormy.'
-						},
-						{
-							title: 'Investigation',
-							date: '1628',
-							text: 'There was some stuff I did. It turned out better than expected.'
-						},
-						{
-							title: 'The next day',
-							date: '1628.1'
-						}
-					]
-				},
-				actions: {
-					//
-				}
+				panes: [
+					{ id: 'summary' },
+					{ id: 'crunch' },
+					{ id: 'story' },
+					{ id: 'actions' }
+				]
 			}
 		}));
 
@@ -119,6 +93,57 @@ define([
 			key: 'char-view',
 			updated: new Date(),
 			payload: {}
+		}));
+
+		this.onmessage(jsonPredicate(function(message) {
+			return message.key === 'char-view-summary'
+				&& message.payload
+				&& message.payload.id === 1;
+		})).respond(_.toJson({
+			user: 1,
+			key: 'char-view-summary',
+			updated: new Date(),
+			payload: {
+				id: 1,
+				name: 'Father Eric Mathias',
+				type: 'player',
+				game: {
+					id: 1,
+					name: 'St. Wolfgang\'s Vampire Hunters'
+				}
+			}
+		}));
+
+		this.onmessage(jsonPredicate(function(message) {
+			return message.key === 'char-view-story'
+				&& message.payload
+				&& message.payload.id === 1;
+		})).respond(_.toJson({
+			user: 1,
+			key: 'char-view-story',
+			updated: new Date(),
+			payload: {
+				id: 1,
+				entries: [
+					{
+						id: 1,
+						title: 'Backstory',
+						date: '1626',
+						text: 'It was a dark and stormy night. The night was dark, and the sky was stormy.'
+					},
+					{
+						id: 2,
+						title: 'Investigation',
+						date: '1628',
+						text: 'There was some stuff I did. It turned out better than expected.'
+					},
+					{
+						id: 3,
+						title: 'The next day',
+						date: '1628.1'
+					}
+				]
+			}
 		}));
 
 	});

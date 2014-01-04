@@ -5,7 +5,7 @@
 		<li class="entry well well-sm"
 		    ng-repeat="entry in story.entries"
 			ng-class="{ active: entry.active, empty: !entry.text }"
-			ng-click="select($event, entry)">
+			ng-click="select(entry, $event)">
 
 			<div class="page-header">
 				<h4>

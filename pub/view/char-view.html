@@ -5,20 +5,20 @@
 		<div class="panel-heading">
 			<ul class="nav nav-pills">
 
-				<li ng-class="{ active: character.summary && character.summary.active }" ng-show="character.summary">
-					<a href="#" ng-click="select($event, character.summary)">Summary</a>
+				<li ng-class="{ active: panes.summary && panes.summary.active }" ng-show="panes.summary">
+					<a href="#" ng-click="select(character.summary, $event)">Summary</a>
 				</li>
 
-				<li ng-class="{ active: character.crunch && character.crunch.active }" ng-show="character.crunch">
-					<a href="#" ng-click="select($event, character.crunch)">Crunch</a>
+				<li ng-class="{ active: panes.crunch && panes.crunch.active }" ng-show="panes.crunch">
+					<a href="#" ng-click="select(character.crunch, $event)">Crunch</a>
 				</li>
 
-				<li ng-class="{ active: character.story && character.story.active }" ng-show="character.story">
-					<a href="#" ng-click="select($event, character.story)">Story</a>
+				<li ng-class="{ active: panes.story && panes.story.active }" ng-show="panes.story">
+					<a href="#" ng-click="select(character.story, $event)">Story</a>
 				</li>
 
-				<li ng-class="{ active: character.actions && character.actions.active }" ng-show="character.actions">
-					<a href="#" ng-click="select($event, character.actions)">Actions</a>
+				<li ng-class="{ active: panes.actions && panes.actions.active }" ng-show="panes.actions">
+					<a href="#" ng-click="select(character.actions, $event)">Actions</a>
 				</li>
 
 			</ul>
@@ -27,20 +27,20 @@
 		<div class="panel-body">
 
 			<div chron-char-view-summary
-			     ng-show="character.summary && character.summary.active"
-			     summary="character.summary"></div>
+			     ng-show="panes.summary && panes.summary.active"
+			     selected="selected"></div>
 
 			<div chron-char-view-crunch
-			     ng-show="character.crunch && character.crunch.active"
-			     crunch="character.crunch"></div>
+			     ng-show="panes.crunch && panes.crunch.active"
+			     selected="selected"></div>
 
 			<div chron-char-view-story
-			     ng-show="character.story && character.story.active"
-			     story="character.story"></div>
+			     ng-show="panes.story && panes.story.active"
+			     selected="selected"></div>
 
 			<div chron-char-view-actions
-			     ng-show="character.actions && character.actions.active"
-			     actions="character.actions"></div>
+			     ng-show="panes.actions && panes.actions.active"
+			     selected="selected"></div>
 
 		</div>
 

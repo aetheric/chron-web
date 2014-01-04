@@ -7,6 +7,11 @@ define([
 
 		var user = null;
 		var data = {};
+		var listeners = {
+			open: [],
+			message: [],
+			close: []
+		};
 
 		function needsUpdate(key, updated) {
 			var entry = data[key];
@@ -46,7 +51,7 @@ define([
 			});
 		}
 
-		socket.on('message', function(event) {
+		on('message', function(event) {
 			var message = _.fromJson(event.data);
 			if (message && _.isNumber(message.user)) {
 				user = message.user;
@@ -63,22 +68,48 @@ define([
 			});
 
 			if (_.isFunction(initial) && needsUpdate(id)) {
-				socket.on('open', initial);
+				on('open', initial);
 			}
 		}
 
 		function send(key, message) {
-			socket.send(_.toJson({
+			var msg = _.toJson({
 				user: user,
 				key: key,
 				updated: new Date(),
 				payload: message
-			}));
+			});
+
+			if (socket.readyState() !== WebSocket.OPEN) {
+				on('open', _.partial(socket.send, msg));
+				return;
+			}
+
+			socket.send(msg);
 		}
+
+		function on(event, callback) {
+			listeners[event].push(callback);
+		}
+
+		_.each(listeners, function(listeners, event) {
+			socket.on(event, function() {
+				var socket_args = arguments;
+
+				_.each(listeners, function(listener) {
+					listener.apply(null, socket_args);
+				});
+			});
+		});
+
+		on('open', function() {
+			console.log('WebSocket opened.')
+		});
 
 		return {
 			link: link,
-			send: send
+			send: send,
+			on: on
 		}
 	}
 

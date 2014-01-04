@@ -92,7 +92,7 @@ var Sockete = (function () {
     
     this.__server = null;
     
-    this.readyState = 0; // 'connecting' http://dev.w3.org/html5/websockets/#websocket
+    this.readyState = Sockete.Client.CONNECTING;
     
     var self = this;
     
@@ -116,8 +116,8 @@ var Sockete = (function () {
     function dispatch (response) {
       // Store history here, or something
       switch(response.type) {
-        case 'open': readyState(1); break;
-        case 'close': readyState(3); break;
+        case 'open': readyState(Sockete.Client.OPEN); break;
+        case 'close': readyState(Sockete.Client.CLOSED); break;
       }
       self['on'+response.type](response);
     }
@@ -133,7 +133,12 @@ var Sockete = (function () {
     Sockete.clients.push(this);
     this.__sockete_id = Sockete.clients.length;
   }
-  
+
+  // As per http://www.w3.org/TR/2011/WD-websockets-20110419/#the-websocket-interface
+  Sockete.Client.CONNECTING = 0;
+  Sockete.Client.OPEN = 1;
+  Sockete.Client.CLOSING = 2;
+  Sockete.Client.CLOSED = 3;
   
 })();
 (function () {

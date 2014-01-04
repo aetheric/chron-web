@@ -1,0 +1,21 @@
+CACHE MANIFEST
+
+CACHE:
+
+//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js
+//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
+//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js
+//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js
+//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js
+//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-mocks.js
+//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.10/text.js
+//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min.js
+/lib/angular-websocket.js
+
+NETWORK:
+
+*
+
+FALLBACK:
+
+# Nothing to fall back to yet.

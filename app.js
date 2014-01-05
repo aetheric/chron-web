@@ -13,6 +13,7 @@ var express = require('./express')();
 // Configure assets and routing
 require('./assets')(express);
 require('./routing')(express);
+require('./sitemap')(express);
 
 // Start the server
 console.log("Starting server in ", env);

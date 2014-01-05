@@ -24,7 +24,8 @@
 		"express": "3.4.7",
 		"bundle-up2": "0.4.5",
 		"jade": "0.35.0",
-		"newrelic": "1.2.0"
+		"newrelic": "1.2.0",
+	    "sitemap": "0.7.1"
     },
 
     "devDependencies": {

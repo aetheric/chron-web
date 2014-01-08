@@ -61,6 +61,21 @@ require.config({
 		protobuf: [
 //			'//raw.github.com/dcodeIO/ProtoBuf.js/1.5.2/ProtoBuf.min',
 			'lib/ProtoBuf'
+		],
+
+		amplify_core: [
+//			'//raw.github.com/appendto/amplify/1.1.2/lib/amplify.core.min',
+			'lib/amplify.core'
+		],
+
+		amplify_request: [
+//			'//raw.github.com/appendto/amplify/1.1.2/lib/amplify.request.min',
+			'lib/amplify.request'
+		],
+
+		amplify_store: [
+//			'//raw.github.com/appendto/amplify/1.1.2/lib/amplify.store.min',
+			'lib/amplify.store'
 		]
 
 	},
@@ -135,6 +150,27 @@ require.config({
 		protobuf: {
 			deps: [ 'bytebuffer' ],
 			exports: 'ProtoBuf'
+		},
+
+		amplify_core: {
+			exports: 'amplify'
+		},
+
+		amplify_request: {
+			deps: [ 'amplify_core' ],
+			init: function(amplify) {
+				return amplify.request;
+			}
+		},
+
+		amplify_store: {
+			deps: [
+				'amplify_core',
+				'json'
+			],
+			init: function(amplify) {
+				return amplify.store;
+			}
 		}
 
 	},

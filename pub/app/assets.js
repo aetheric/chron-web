@@ -51,6 +51,16 @@ require.config({
 		sockete: [
 //			'//raw.github.com/ismasan/Sockete/master/dist/0.0.1/sockete.min',
 			'lib/sockete'
+		],
+
+		bytebuffer: [
+//			'//raw.github.com/dcodeIO/ProtoBuf.js/1.5.2/externs/ByteBuffer',
+			'lib/ByteBuffer'
+		],
+
+		protobuf: [
+//			'//raw.github.com/dcodeIO/ProtoBuf.js/1.5.2/ProtoBuf.min',
+			'lib/ProtoBuf'
 		]
 
 	},
@@ -116,6 +126,15 @@ require.config({
 
 		sockete: {
 			exports: 'Sockete'
+		},
+
+		bytebuffer: {
+			exports: 'ByteBuffer'
+		},
+
+		protobuf: {
+			deps: [ 'bytebuffer' ],
+			exports: 'ProtoBuf'
 		}
 
 	},

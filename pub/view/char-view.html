@@ -10,15 +10,15 @@
 				</li>
 
 				<li ng-class="{ active: panes.crunch && panes.crunch.active }" ng-show="panes.crunch">
-					<a href="#" ng-click="select(character.crunch, $event)">Crunch</a>
+					<a href="#" ng-click="select('crunch', $event)">Crunch</a>
 				</li>
 
 				<li ng-class="{ active: panes.story && panes.story.active }" ng-show="panes.story">
-					<a href="#" ng-click="select(character.story, $event)">Story</a>
+					<a href="#" ng-click="select('story', $event)">Story</a>
 				</li>
 
 				<li ng-class="{ active: panes.actions && panes.actions.active }" ng-show="panes.actions">
-					<a href="#" ng-click="select(character.actions, $event)">Actions</a>
+					<a href="#" ng-click="select('actions', $event)">Actions</a>
 				</li>
 
 			</ul>

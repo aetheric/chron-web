@@ -9,6 +9,9 @@ define([
 
 		_.extend($scope, {
 
+			/** The list data provided by the server */
+			list: null,
+
 			/** The collected characters of the list */
 			characters: null,
 
@@ -49,6 +52,7 @@ define([
 		});
 
 		$scope.$root.$watch('data.char_list.payload', function(list) {
+			$scope.list = list;
 
 			_.extend($scope.flags, {
 				loading: list == null,

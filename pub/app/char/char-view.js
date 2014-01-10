@@ -36,7 +36,8 @@ define([
 			select: function(pane, $event) {
 				$event && $event.preventDefault();
 
-				if (!pane || pane === $scope.selectedPane) {
+				var paneRef = _.isString(pane) ? $scope.panes[pane] : pane;
+				if (!paneRef || paneRef === $scope.selectedPane) {
 					return;
 				}
 
@@ -44,7 +45,7 @@ define([
 					$scope.selectedPane.active = false;
 				}
 
-				$scope.selectedPane = pane;
+				$scope.selectedPane = paneRef;
 				$scope.selectedPane.active = true;
 			}
 
@@ -59,6 +60,7 @@ define([
 		_socket.listen('char_view');
 
 		$scope.$root.$watch('data.char_view.payload', function(character) {
+			$scope.character = character;
 
 			_.extend($scope.flags, {
 				showDetail: !_.isNull(character) && !_.isUndefined(character.id),

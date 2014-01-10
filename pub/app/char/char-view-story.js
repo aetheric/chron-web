@@ -32,6 +32,7 @@ define([
 		_socket.listen('char_view_story');
 
 		$scope.$root.$watch('data.char_view_story.payload', function(story) {
+			$scope.story = story;
 
 			if (story && story.entries) {
 				$scope.entries = {};

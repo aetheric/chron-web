@@ -7,6 +7,9 @@ define([
 	function controller($scope, _socket) {
 
 		_.extend($scope, {
+
+			summary: null
+
 		});
 
 		_socket.listen('char_view_summary');
@@ -15,6 +18,10 @@ define([
 			_socket.send('char_view_summary', {
 				id: $scope.selected
 			});
+		});
+
+		$scope.$root.$watch('data.char_view_summary.payload', function(summary) {
+			$scope.summary = summary;
 		});
 
 	}

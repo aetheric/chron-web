@@ -51,36 +51,36 @@ define([
 		});
 
 		$scope.$watch('selected', function() {
-			_socket.send('char-view', {
+			_socket.send('char_view', {
 				id: $scope.selected
 			});
 		});
 
-		_socket.link($scope, 'character', 'char-view');
+		_socket.listen('char_view');
 
-		$scope.$watch('character', function() {
+		$scope.$root.$watch('data.char_view.payload', function(character) {
 
 			_.extend($scope.flags, {
-				showDetail: !_.isNull($scope.character) && !_.isUndefined($scope.character.id),
-				showMissing: !_.isNull($scope.character) && _.isUndefined($scope.character.id),
-				showIntro: _.isNull($scope.character)
+				showDetail: !_.isNull(character) && !_.isUndefined(character.id),
+				showMissing: !_.isNull(character) && _.isUndefined(character.id),
+				showIntro: _.isNull(character)
 			});
 
-			if ($scope.character && $scope.character.panes) {
+			if (character && character.panes) {
 				$scope.panes = {};
 
-				_.each($scope.character.panes, function(pane) {
+				_.each(character.panes, function(pane) {
 					$scope.panes[pane.id] = pane;
 				});
 
-				var pane = $scope.panes[$routeParams['paneId']] || _.first($scope.character.panes);
+				var pane = $scope.panes[$routeParams.paneId] || _.first(character.panes);
 				$scope.select(pane);
 			}
 
 		});
 
 		$scope.$watch('$locationChangeSuccess', function() {
-			var selectedPane = $routeParams['paneId'];
+			var selectedPane = $routeParams.paneId;
 
 			if (!$scope.panes || !selectedPane) {
 				return;

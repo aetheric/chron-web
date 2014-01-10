@@ -8,7 +8,6 @@ define([
 
 		_.extend($scope, {
 
-			story: null,
 			entries: null,
 			selectedItem: null,
 
@@ -30,32 +29,32 @@ define([
 
 		});
 
-		_socket.link($scope, 'story', 'char-view-story');
+		_socket.listen('char_view_story');
 
-		$scope.$watch('story', function() {
+		$scope.$root.$watch('data.char_view_story.payload', function(story) {
 
-			if ($scope.story && $scope.story.entries) {
+			if (story && story.entries) {
 				$scope.entries = {};
 
-				_.each($scope.story.entries, function(entry) {
+				_.each(story.entries, function(entry) {
 					$scope.entries[entry.id] = entry;
 				});
 
-				var entry = $scope.entries[$routeParams['entryId']];
+				var entry = $scope.entries[$routeParams.entryId];
 				$scope.select(entry);
 			}
 
 		});
 
 		$scope.$watch('selected', function() {
-			_socket.send('char-view-story', {
+			_socket.send('char_view_story', {
 				id: $scope.selected
 			})
 		});
 
 		$scope.$watch('$locationChangeSuccess', function() {
 			if ($routeParams.paneId === 'story') {
-				var entryId = parseInt($routeParams['entryId']) || null;
+				var entryId = parseInt($routeParams.entryId) || null;
 
 				if (!entryId || !$scope.entries) {
 					return;

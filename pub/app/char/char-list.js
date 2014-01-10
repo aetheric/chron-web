@@ -9,9 +9,6 @@ define([
 
 		_.extend($scope, {
 
-			/** A list of lists of characters */
-			list: null,
-
 			/** The collected characters of the list */
 			characters: null,
 
@@ -51,15 +48,15 @@ define([
 			}
 		});
 
-		$scope.$watch('list', function() {
+		$scope.$root.$watch('data.char_list.payload', function(list) {
 
 			_.extend($scope.flags, {
-				loading: $scope.list == null,
-				empty: $scope.list && !$scope.list.length
+				loading: list == null,
+				empty: list && !list.length
 			});
 
 			$scope.characters = {};
-			_.each($scope.list, function(game) {
+			_.each(list, function(game) {
 				_.each(game.characters, function(character) {
 					$scope.characters[character.id] = character;
 				});
@@ -67,8 +64,8 @@ define([
 
 		});
 
-		_socket.link($scope, 'list', 'char-list', function() {
-			_socket.send('char-list', {});
+		_socket.listen('char_list', function() {
+			_socket.send('char_list', {});
 		});
 
 		$scope.$watch('selected', function() {

@@ -3,10 +3,12 @@ define([
 	'app/chron'
 ], function(_, chron) {
 
-	function service(socket) {
+	function service($rootScope, socket) {
 
-		var user = null;
-		var data = {};
+		_.extend($rootScope, {
+			data: {}
+		});
+
 		var listeners = {
 			open: [],
 			message: [],
@@ -14,7 +16,7 @@ define([
 		};
 
 		function needsUpdate(key, updated) {
-			var entry = data[key];
+			var entry = $rootScope.data[key];
 			return !_.isObject(entry)
 				|| _.isNull(entry.payload)
 			    || _.isUndefined(entry.payload)
@@ -22,59 +24,42 @@ define([
 				|| ( _.isDate(updated) && entry.updated < updated )
 		}
 
-		function ensure(key) {
-			if (!_.isObject(data[key])) {
-				data[key] = {
-					payload: null,
-					updated: null,
-					targets: []
-				}
-			}
-
-			return data[key];
-		}
-
 		function update(key, payload, updated) {
 			if (!key || !updated || !needsUpdate(key, updated)) {
 				return;
 			}
 
-			var entry = ensure(key);
-
-			_.extend(entry, {
+			_.extend(listen(key), {
 				payload: payload,
 				updated: updated
-			});
-
-			_.each(entry.targets, function(target) {
-				target.scope[target.target] = payload;
 			});
 		}
 
 		on('message', function(event) {
 			var message = _.fromJson(event.data);
-			if (message && _.isNumber(message.user)) {
-				user = message.user;
-			}
-
-			update(message.key, message.payload, message.updated);
+			update(_.underscored(message.key), message.payload, message.updated);
 		});
 
-		function link($scope, target, id, initial) {
-			var entry = ensure(id);
-			entry.targets.push({
-				scope: $scope,
-				target: target
-			});
+		function listen(key, initial) {
+			var underkey = _.underscored(key);
 
-			if (_.isFunction(initial) && needsUpdate(id)) {
+			if (!_.isObject($rootScope.data[underkey])) {
+				$rootScope.data[underkey] = {
+					payload: null,
+					updated: null
+				}
+			}
+
+			if (_.isFunction(initial) && needsUpdate(underkey)) {
 				on('open', initial);
 			}
+
+			return $rootScope.data[underkey];
 		}
 
 		function send(key, message) {
 			var msg = _.toJson({
-				user: user,
+				user: null,
 				key: key,
 				updated: new Date(),
 				payload: message
@@ -107,13 +92,14 @@ define([
 		});
 
 		return {
-			link: link,
+			listen: listen,
 			send: send,
 			on: on
 		}
 	}
 
 	return chron.service('_socket', [
+		'$rootScope',
 		'WebSocket',
 		service
 	]);

@@ -7,15 +7,12 @@ define([
 	function controller($scope, _socket) {
 
 		_.extend($scope, {
-
-			summary: null
-
 		});
 
-		_socket.link($scope, 'summary', 'char-view-summary');
+		_socket.listen('char_view_summary');
 
 		$scope.$watch('selected', function() {
-			_socket.send('char-view-summary', {
+			_socket.send('char_view_summary', {
 				id: $scope.selected
 			});
 		});

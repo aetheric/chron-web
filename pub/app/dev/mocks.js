@@ -14,10 +14,10 @@ define([
 	sockete.Server.configure('ws://chron.aetheric.co.nz', function() {
 
 		this.onmessage(jsonPredicate(function(message) {
-			return message.key === 'char-list';
+			return message.key === 'char_list';
 		})).respond(_.toJson({
 			user: 1,
-			key: 'char-list',
+			key: 'char_list',
 			updated: new Date(),
 			payload: [
 				{
@@ -47,12 +47,12 @@ define([
 		}));
 
 		this.onmessage(jsonPredicate(function(message) {
-			return message.key === 'char-view'
+			return message.key === 'char_view'
 				&& message.payload
 				&& message.payload.id === 1;
 		})).respond(_.toJson({
 			user: 1,
-			key: 'char-view',
+			key: 'char_view',
 			updated: new Date(),
 			payload: {
 				id: 1,
@@ -66,12 +66,12 @@ define([
 		}));
 
 		this.onmessage(jsonPredicate(function(message) {
-			return message.key === 'char-view'
+			return message.key === 'char_view'
 				&& message.payload
 				&& message.payload.id === 2;
 		})).respond(_.toJson({
 			user: 1,
-			key: 'char-view',
+			key: 'char_view',
 			updated: new Date(),
 			payload: {
 				id: 2,
@@ -87,21 +87,21 @@ define([
 		}));
 
 		this.onmessage(jsonPredicate(function(message) {
-			return message.key === 'char-view';
+			return message.key === 'char_view';
 		})).respond(_.toJson({
 			user: 1,
-			key: 'char-view',
+			key: 'char_view',
 			updated: new Date(),
 			payload: {}
 		}));
 
 		this.onmessage(jsonPredicate(function(message) {
-			return message.key === 'char-view-summary'
+			return message.key === 'char_view_summary'
 				&& message.payload
 				&& message.payload.id === 1;
 		})).respond(_.toJson({
 			user: 1,
-			key: 'char-view-summary',
+			key: 'char_view_summary',
 			updated: new Date(),
 			payload: {
 				id: 1,
@@ -115,12 +115,12 @@ define([
 		}));
 
 		this.onmessage(jsonPredicate(function(message) {
-			return message.key === 'char-view-story'
+			return message.key === 'char_view_story'
 				&& message.payload
 				&& message.payload.id === 1;
 		})).respond(_.toJson({
 			user: 1,
-			key: 'char-view-story',
+			key: 'char_view_story',
 			updated: new Date(),
 			payload: {
 				id: 1,

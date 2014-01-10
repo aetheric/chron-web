@@ -5,3 +5,8 @@ This application is designed to manage large-scale live-action roleplaying games
 * Game knowledge wikis
 * Community and game forums
 * Game action managers
+
+The application is deployed in the following locations:
+
+* [Development](http://chronicler-dev.herokuapp.com)
+* [Production](http://chron.aetheric.co.nz)

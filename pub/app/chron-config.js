@@ -40,9 +40,21 @@ define([
 			// Routing for the character manager.
 			.when('/char/:charId?', charRoute())
 
+			.when('/char/:charId/summary/:entityId?', charRoute({
+				paneId: 'summary'
+			}))
+
+			.when('/char/:charId/crunch/:entityId?', charRoute({
+				paneId: 'crunch'
+			}))
+
 			// Routing for the character manager story pane.
 			.when('/char/:charId/story/:entryId?', charRoute({
 				paneId: 'story'
+			}))
+
+			.when('/char/:charId/actions/:entityId?', charRoute({
+				paneId: 'actions'
 			}))
 
 			// Just redirect to the dashboard in all other cases.

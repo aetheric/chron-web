@@ -18,7 +18,7 @@
 				<li ng-repeat="character in group.characters"
 				    ng-class="{ active: character.active }">
 
-					<a href="#" ng-click="select(character, $event)">
+					<a href="#/char/{{ character.id }}">
 						{{ character.display }}
 					</a>
 

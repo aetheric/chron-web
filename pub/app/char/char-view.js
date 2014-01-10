@@ -7,10 +7,11 @@ define([
 	'app/char/char-view-actions',
 	'app/char/char-view-crunch',
 	'app/char/char-view-story',
-	'app/char/char-view-summary'
+	'app/char/char-view-summary',
+	'app/service/utils'
 ], function(_, chron, view) {
 
-	function controller($scope, _socket, $routeParams) {
+	function controller($scope, _socket, _utils, $routeParams) {
 
 		_.extend($scope, {
 
@@ -51,15 +52,29 @@ define([
 
 		});
 
-		$scope.$watch('selected', function() {
-			_socket.send('char_view', {
-				id: $scope.selected
-			});
+		_utils.watch($scope, {
+
+			'selected': function(newval) {
+				_socket.send('char_view', {
+					id: newval
+				});
+			},
+
+			'$locationChangeSuccess': function() {
+				var selectedPane = $routeParams.paneId;
+
+				if (!$scope.panes || !selectedPane) {
+					return;
+				}
+
+				if (!$scope.selectedPane || $scope.selectedPane.id !== selectedPane) {
+					$scope.select($scope.panes[selectedPane]);
+				}
+			}
+
 		});
 
-		_socket.listen('char_view');
-
-		$scope.$root.$watch('data.char_view.payload', function(character) {
+		_socket.listen('char_view', function(character) {
 			$scope.character = character;
 
 			_.extend($scope.flags, {
@@ -68,8 +83,8 @@ define([
 				showIntro: _.isNull(character)
 			});
 
+			$scope.panes = {};
 			if (character && character.panes) {
-				$scope.panes = {};
 
 				_.each(character.panes, function(pane) {
 					$scope.panes[pane.id] = pane;
@@ -79,18 +94,6 @@ define([
 				$scope.select(pane);
 			}
 
-		});
-
-		$scope.$watch('$locationChangeSuccess', function() {
-			var selectedPane = $routeParams.paneId;
-
-			if (!$scope.panes || !selectedPane) {
-				return;
-			}
-
-			if (!$scope.selectedPane || $scope.selectedPane.id !== selectedPane) {
-				$scope.select($scope.panes[selectedPane]);
-			}
 		});
 
 	}
@@ -109,6 +112,7 @@ define([
 		controller: [
 			'$scope',
 			'_socket',
+			'_utils',
 			'$routeParams',
 			controller
 		]
@@ -118,4 +122,5 @@ define([
 	return chron.directive('chronCharView', function() {
 		return directive;
 	});
+
 });

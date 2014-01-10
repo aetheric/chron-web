@@ -2,10 +2,12 @@ define([
 	'underscore',
 	'app/chron',
 	'text!view/char-list.html',
-	'app/service/socket'
+
+	'app/service/socket',
+	'app/service/utils'
 ], function(_, chron, view) {
 
-	function controller($scope, _socket) {
+	function controller($scope, $routeParams, _utils, _socket) {
 
 		_.extend($scope, {
 
@@ -31,7 +33,16 @@ define([
 			select: function(character, $event) {
 				$event && $event.preventDefault();
 
-				if (!character || $scope.selectedCharacter === character) {
+				if (!character) {
+					if ($scope.selectedCharacter) {
+						$scope.selectedCharacter.active = false;
+					}
+
+					$scope.selectedCharacter = null;
+					return;
+				}
+
+				if ($scope.selectedCharacter === character) {
 					return; // do nothing if the same.
 				}
 
@@ -45,13 +56,23 @@ define([
 
 		});
 
-		$scope.$watch('selectedCharacter', function() {
-			if ($scope.selectedCharacter && $scope.selectedCharacter.id) {
-				$scope.selected = $scope.selectedCharacter.id;
+		_utils.watch($scope, {
+
+			'$locationChangeSuccess': function() {
+				var characterId = parseInt($routeParams['charId']);
+
+				if (characterId && characterId !== $scope.selected) {
+					$scope.selected = characterId;
+				}
+			},
+
+			'selected': function(newval) {
+				$scope.select($scope.characters[newval]);
 			}
+
 		});
 
-		$scope.$root.$watch('data.char_list.payload', function(list) {
+		_socket.listen('char_list', function(list) {
 			$scope.list = list;
 
 			_.extend($scope.flags, {
@@ -66,14 +87,8 @@ define([
 				});
 			});
 
-		});
-
-		_socket.listen('char_list', function() {
-			_socket.send('char_list', {});
-		});
-
-		$scope.$watch('selected', function() {
 			$scope.select($scope.characters[$scope.selected]);
+
 		});
 
 	}
@@ -91,6 +106,8 @@ define([
 
 		controller: [
 			'$scope',
+			'$routeParams',
+			'_utils',
 			'_socket',
 			controller
 		]

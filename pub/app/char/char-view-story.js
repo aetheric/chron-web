@@ -8,6 +8,7 @@ define([
 
 		_.extend($scope, {
 
+			story: null,
 			entries: null,
 			selectedItem: null,
 
@@ -34,17 +35,21 @@ define([
 		$scope.$root.$watch('data.char_view_story.payload', function(story) {
 			$scope.story = story;
 
-			if (story && story.entries) {
-				$scope.entries = {};
-
-				_.each(story.entries, function(entry) {
-					$scope.entries[entry.id] = entry;
-				});
-
-				var entry = $scope.entries[$routeParams.entryId];
-				$scope.select(entry);
+			if (!_.isObject(story)) {
+				$scope.entries = null;
+				return;
 			}
 
+			$scope.entries = {};
+			_.each(story.entries, function(entry) {
+				$scope.entries[entry.id] = entry;
+			});
+
+			var entryId = $routeParams.entryId;
+			if (entryId) {
+				var entry = $scope.entries[entryId];
+				$scope.select(entry);
+			}
 		});
 
 		$scope.$watch('selected', function() {

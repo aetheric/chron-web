@@ -6,19 +6,19 @@
 			<ul class="nav nav-pills">
 
 				<li ng-class="{ active: panes.summary && panes.summary.active }" ng-show="panes.summary">
-					<a href="#" ng-click="select(character.summary, $event)">Summary</a>
+					<a href="#/char/{{ selected }}/summary">Summary</a>
 				</li>
 
 				<li ng-class="{ active: panes.crunch && panes.crunch.active }" ng-show="panes.crunch">
-					<a href="#" ng-click="select('crunch', $event)">Crunch</a>
+					<a href="#/char/{{ selected }}/crunch">Crunch</a>
 				</li>
 
 				<li ng-class="{ active: panes.story && panes.story.active }" ng-show="panes.story">
-					<a href="#" ng-click="select('story', $event)">Story</a>
+					<a href="#/char/{{ selected }}/story">Story</a>
 				</li>
 
 				<li ng-class="{ active: panes.actions && panes.actions.active }" ng-show="panes.actions">
-					<a href="#" ng-click="select('actions', $event)">Actions</a>
+					<a href="#/char/{{ selected }}/actions">Actions</a>
 				</li>
 
 			</ul>

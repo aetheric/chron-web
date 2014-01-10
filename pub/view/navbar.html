@@ -22,7 +22,7 @@
 			<ul class="nav navbar-nav">
 				<li ng-repeat="item in navigation.primary"
 					ng-class="{ active: item.active }">
-					<a href="#" ng-click="goTo($event, item.path)">
+					<a href="#{{ item.path }}">
 						{{ item.display }}
 					</a>
 				</li>

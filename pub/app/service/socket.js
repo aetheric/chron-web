@@ -40,7 +40,7 @@ define([
 			update(_.underscored(message.key), message.payload, message.updated);
 		});
 
-		function listen(key, initial) {
+		function listen(key, watch) {
 			var underkey = _.underscored(key);
 
 			if (!_.isObject($rootScope.data[underkey])) {
@@ -50,8 +50,14 @@ define([
 				}
 			}
 
-			if (_.isFunction(initial) && needsUpdate(underkey)) {
-				on('open', initial);
+			if (_.isFunction(watch)) {
+				$rootScope.$watch('data.' + underkey + '.payload', watch);
+			}
+
+			if (needsUpdate(underkey)) {
+				on('open', function() {
+					send(underkey, {});
+				});
 			}
 
 			return $rootScope.data[underkey];

@@ -8,6 +8,11 @@ require.config({
 			'lib/angular'
 		],
 
+		jquery: [
+			'//code.jquery.com/jquery-1.10.2.min',
+			'lib/jquery'
+		],
+
 		underscore: [
 			'//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min',
 			'lib/underscore'
@@ -84,6 +89,10 @@ require.config({
 
 		angular: {
 			exports: 'angular'
+		},
+
+		jquery: {
+			exports: '$'
 		},
 
 		angular_ui: {
@@ -181,10 +190,13 @@ require.config({
 		'angular',
 		'app/chron-config',
 
-		//underscore bootstrapping
+		// Underscore bootstrapping
 		'underscore',
 		'underscore_string',
 		'json',
+
+		// JQuery bootstrapping
+		'jquery',
 
 		// Global directives
 		'app/global/navbar',

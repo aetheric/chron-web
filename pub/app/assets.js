@@ -13,6 +13,11 @@ require.config({
 			'lib/jquery'
 		],
 
+		bootstrap: [
+			'//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min',
+			'lib/bootstrap'
+		],
+
 		underscore: [
 			'//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min',
 			'lib/underscore'
@@ -93,6 +98,21 @@ require.config({
 
 		jquery: {
 			exports: '$'
+		},
+
+		bootstrap: {
+			deps: [ 'jquery' ],
+			init: function($) {
+				if (
+						$.fn.alert &&
+						$.fn.button &&
+						$.fn.carousel &&
+						$.fn.collapse // etc.
+				) {
+					return $;
+				}
+				return null;
+			}
 		},
 
 		angular_ui: {
@@ -195,8 +215,9 @@ require.config({
 		'underscore_string',
 		'json',
 
-		// JQuery bootstrapping
+		// JQuery/Bootstrap bootstrapping
 		'jquery',
+		'bootstrap',
 
 		// Global directives
 		'app/global/navbar',
